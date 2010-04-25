@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         id="TbAreGo-overlay">
+	<script type="application/javascript" src="chrome://TbAreGo/content/windowOverlay.js"/>
+
+	<window id="messengerWindow">
+		<html:audio id="TbAreGo-audio"
+		            type="audio/ogg"
+		            style="visibility:collapse;"/>
+	</window>
+
+</overlay>

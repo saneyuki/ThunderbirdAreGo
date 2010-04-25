@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+<Description about="urn:mozilla:install-manifest">
+
+	<!-- Extension Identifier -->
+	<em:id>TbAreGo@saneyuki</em:id>
+	<em:version>master</em:version>
+	<em:type>2</em:type>
+
+	<!-- Metadata -->
+	<em:name>Thunderbird Are Go</em:name>
+	<em:description>Thunderbird Are Go!</em:description>
+	<em:optionsURL>chrome://TbAreGo/content/options.xul</em:optionsURL>
+	<em:creator>saneyuki</em:creator>
+
+	<!-- Target Application -->
+	<!-- Thunderbird -->
+	<em:targetApplication>
+		<Description>
+			<em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+			<em:minVersion>3.0</em:minVersion>
+			<em:maxVersion>3.0.*</em:maxVersion>
+		</Description>
+	</em:targetApplication>
+
+</Description>
+</RDF>

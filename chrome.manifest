@@ -1,0 +1,8 @@
+# Defines the package
+content  TbAreGo               jar:chrome/TbAreGo.jar!/content/
+
+## Overlay
+overlay  chrome://messenger/content/messenger.xul  chrome://TbAreGo/content/windowOverlay.xul
+
+## Locale
+locale   TbAreGo   en-US       jar:chrome/TbAreGo.jar!/locale/en-US/

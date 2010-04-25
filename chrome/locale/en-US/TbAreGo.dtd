@@ -1,0 +1,4 @@
+<!-- Options -->
+<!ENTITY TbAreGo.option.title                      "Options">
+<!ENTITY TbAreGo.option.audioOptions.caption       "Select Audio">
+<!ENTITY TbAreGo.option.selectAudio.button         "Select">
