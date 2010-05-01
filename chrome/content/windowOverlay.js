@@ -59,14 +59,8 @@ var TbAreGo = {
 	prefObserve: function (aSubject, aData) {
 		switch (aData) {
 			case "loopPlay":
-				var value = this.prefSvc.getBoolPref(aData);
-				if (value) {
-					var pleseSet = this.strBundle.GetStringFromName("TbAreGo.option.loop.pleaseReopenWindow");
-					window.alert(pleseSet);
-				}
-				else {
-					this.audioElm.removeEventListener("ended", this, false);
-				}
+				var pleseSet = this.strBundle.GetStringFromName("TbAreGo.option.loop.pleaseReopenWindow");
+				window.alert(pleseSet);
 				break;
 		}
 	},
