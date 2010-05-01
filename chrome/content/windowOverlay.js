@@ -3,6 +3,14 @@ var TbAreGo = {
 	// The Audio Element's Id.
 	AUDIO_ID: "TbAreGo-audio",
 
+	_audioElm: null,
+	get audioElm () {
+		if (!this._audioElm) {
+			this._audioElm = document.getElementById(this.AUDIO_ID);
+		}
+		return this._audioElm;
+	},
+
 	prefBranch: "extensions.TbAreGo.",
 
 	_prefSvc: null,
@@ -44,18 +52,20 @@ var TbAreGo = {
 		window.removeEventListener("load", this, false);
 		window.addEventListener("unload", this, false);
 
-		this.playAudio(this.AUDIO_ID);
+		this.initAudio();
+		this.audioElm.play();
+
+		this.audioElm.addEventListener("ended", this, false);
 	},
 
 	onUnLoad: function() {
 		window.removeEventListener("unload", this, false);
 
-		this.stopAudio(this.AUDIO_ID);
+		this.audioElm.pause();
+		this.audioElm.removeEventListener("ended", this, false);
 	},
 
-	playAudio: function (aId) {
-		var audio = document.getElementById(aId);
-
+	initAudio: function () {
 		try {
 			var path = this.prefSvc.getComplexValue("audioFilePath", Components.interfaces.nsISupportsString);
 
@@ -66,28 +76,18 @@ var TbAreGo = {
 			                .getService(Components.interfaces.nsIIOService);
 			var uri = ioService.newFileURI(file);
 			var fileURL = uri.spec;
+			this.audioElm.src = fileURL;
 		}
 		catch (e) {
 			var pleseSet = this.strBundle.GetStringFromName("TbAreGo.overlay.alert.setAudioFile");
 			window.alert(pleseSet);
 			return;
 		}
-
-		audio.src = fileURL;
-		audio.play();
-
-		audio.addEventListener("ended", this, false);
-	},
-
-	stopAudio: function (aId) {
-		var audio = document.getElementById(aId);
-		audio.pause();
 	},
 
 	resetPlayTime: function () {
-		var audio = document.getElementById(this.AUDIO_ID);
-		audio.currentTime = 0;
-		audio.play();
+		this.audioElm.currentTime = 0;
+		this.audioElm.play();
 	},
 };
 window.addEventListener("load", TbAreGo, false);
