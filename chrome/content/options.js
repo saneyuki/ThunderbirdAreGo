@@ -27,20 +27,50 @@ var TbAreGoOptions = {
 		return this._strBundle;
 	},
 
+	observe: function (aSubject, aTopic, aData) {
+		switch (aTopic) {
+			case "nsPref:changed":
+				this.prefObserve(aSubject, aData);
+				break;
+		}
+	},
+
+	_prefChanged: false,
+
+	prefObserve: function (aSubject, aData) {
+		this._prefChanged = true;
+	},
+
 	handleEvent: function (aEvent) {
 		switch (aEvent.type) {
 			case "load":
 				this.onLoad();
+				break;
+			case "unload":
+				this.onUnLoad();
 				break;
 		}
 	},
 
 	onLoad: function () {
 		window.removeEventListener("load", this, false);
+		window.addEventListener("unload", this, false);
 
 		var path = this.prefSvc.getComplexValue(this.PREFname_audioPath,
 		                                        Components.interfaces.nsISupportsString);
 		document.getElementById(this.textboxId_audioFileName).value = path;
+
+		this.prefSvc.addObserver("", this, false);
+	},
+
+	onUnLoad: function() {
+		window.removeEventListener("unload", this, false);
+		this.prefSvc.removeObserver("", this);
+
+		if (this._prefChanged) {
+			var pleaseRestart = this.strBundle.GetStringFromName("TbAreGo.option.pleaseRestart");
+			window.alert(pleaseRestart);
+		}
 	},
 
 	selectFile: function () {
@@ -57,8 +87,6 @@ var TbAreGoOptions = {
 			var file = filepicker.file;
 			this.prefSvc.setComplexValue(this.PREFname_audioPath, Components.interfaces.nsILocalFile, file);
 			document.getElementById(this.textboxId_audioFileName).value = file.path;
-			var pleaseRestart = this.strBundle.GetStringFromName("TbAreGo.option.pleaseRestart");
-			window.alert(pleaseRestart);
 		}
 	},
 

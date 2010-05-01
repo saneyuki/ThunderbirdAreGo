@@ -48,23 +48,6 @@ var TbAreGo = {
 		}
 	},
 
-	observe: function (aSubject, aTopic, aData) {
-		switch (aTopic) {
-			case "nsPref:changed":
-				this.prefObserve(aSubject, aData);
-				break;
-		}
-	},
-
-	prefObserve: function (aSubject, aData) {
-		switch (aData) {
-			case "loopPlay":
-				var pleseSet = this.strBundle.GetStringFromName("TbAreGo.option.loop.pleaseReopenWindow");
-				window.alert(pleseSet);
-				break;
-		}
-	},
-
 	onLoad: function () {
 		window.removeEventListener("load", this, false);
 		window.addEventListener("unload", this, false);
@@ -76,8 +59,6 @@ var TbAreGo = {
 		if (isLoop) {
 			this.audioElm.addEventListener("ended", this, false);
 		}
-
-		this.prefSvc.addObserver("", this, false);
 	},
 
 	onUnLoad: function() {
@@ -89,8 +70,6 @@ var TbAreGo = {
 		if (isLoop) {
 			this.audioElm.removeEventListener("ended", this, false);
 		}
-
-		this.prefSvc.removeObserver("", this);
 	},
 
 	initAudio: function () {
