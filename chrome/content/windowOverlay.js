@@ -34,6 +34,9 @@ var TbAreGo = {
 			case "unload":
 				this.onUnLoad();
 				break;
+			case "ended":
+				this.resetPlayTime();
+				break;
 		}
 	},
 
@@ -72,11 +75,19 @@ var TbAreGo = {
 
 		audio.src = fileURL;
 		audio.play();
+
+		audio.addEventListener("ended", this, false);
 	},
 
-	stopAudio : function (aId) {
+	stopAudio: function (aId) {
 		var audio = document.getElementById(aId);
 		audio.pause();
+	},
+
+	resetPlayTime: function () {
+		var audio = document.getElementById(this.AUDIO_ID);
+		audio.currentTime = 0;
+		audio.play();
 	},
 };
 window.addEventListener("load", TbAreGo, false);
