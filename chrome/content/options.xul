@@ -9,14 +9,25 @@
 	<script type="application/javascript" src="chrome://TbAreGo/content/options.js"/>
 	<prefpane id="TbAreGo-prefpane1" label="">
 
+		<preferences>
+			<preference id="extensions.TbAreGo.loopPlay"
+			            name="extensions.TbAreGo.loopPlay"
+			            type="bool"/>
+		</preferences>
+
 		<groupbox id="TbAreGo-audioOptions">
 			<caption label="&TbAreGo.option.audioOptions.caption;"/>
-				<hbox>
-					<textbox id="TbAreGo-audioFileName" readonly="true" flex="1"/>
-					<button label="&TbAreGo.option.selectAudio.button;"
-					        icon="open"
-					        oncommand="TbAreGoOptions.selectFile();"/>
-				</hbox>
+				<vbox>
+					<hbox>
+						<textbox id="TbAreGo-audioFileName" readonly="true" flex="1"/>
+						<button label="&TbAreGo.option.selectAudio.button;"
+						        icon="open"
+						        oncommand="TbAreGoOptions.selectFile();"/>
+					</hbox>
+					<checkbox id="TbAreGo-loopPlaying"
+					          label="Loop-playing the audio"
+					          preference="extensions.TbAreGo.loopPlay"/>
+				</vbox>
 		</groupbox>
 
 	</prefpane>

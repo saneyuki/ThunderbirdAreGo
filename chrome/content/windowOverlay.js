@@ -48,6 +48,29 @@ var TbAreGo = {
 		}
 	},
 
+	observe: function (aSubject, aTopic, aData) {
+		switch (aTopic) {
+			case "nsPref:changed":
+				this.prefObserve(aSubject, aData);
+				break;
+		}
+	},
+
+	prefObserve: function (aSubject, aData) {
+		switch (aData) {
+			case "loopPlay":
+				var value = this.prefSvc.getBoolPref(aData);
+				if (value) {
+					var pleseSet = this.strBundle.GetStringFromName("TbAreGo.option.loop.pleaseReopenWindow");
+					window.alert(pleseSet);
+				}
+				else {
+					this.audioElm.removeEventListener("ended", this, false);
+				}
+				break;
+		}
+	},
+
 	onLoad: function () {
 		window.removeEventListener("load", this, false);
 		window.addEventListener("unload", this, false);
@@ -55,14 +78,25 @@ var TbAreGo = {
 		this.initAudio();
 		this.audioElm.play();
 
-		this.audioElm.addEventListener("ended", this, false);
+		var isLoop = this.prefSvc.getBoolPref("loopPlay");
+		if (isLoop) {
+			this.audioElm.addEventListener("ended", this, false);
+		}
+
+		this.prefSvc.addObserver("", this, false);
 	},
 
 	onUnLoad: function() {
 		window.removeEventListener("unload", this, false);
 
 		this.audioElm.pause();
-		this.audioElm.removeEventListener("ended", this, false);
+
+		var isLoop = this.prefSvc.getBoolPref("loopPlay");
+		if (isLoop) {
+			this.audioElm.removeEventListener("ended", this, false);
+		}
+
+		this.prefSvc.removeObserver("", this);
 	},
 
 	initAudio: function () {
