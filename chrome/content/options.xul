@@ -25,7 +25,7 @@
 						        oncommand="TbAreGoOptions.selectFile();"/>
 					</hbox>
 					<checkbox id="TbAreGo-loopPlaying"
-					          label="Loop-playing the audio"
+					          label="&TbAreGo.option.loopPlaying;"
 					          preference="extensions.TbAreGo.loopPlay"/>
 				</vbox>
 		</groupbox>
