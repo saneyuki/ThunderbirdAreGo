@@ -12,7 +12,7 @@
 	<em:name>Thunderbird Are Go</em:name>
 	<em:description>Thunderbird Are Go!</em:description>
 	<em:optionsURL>chrome://TbAreGo/content/options.xul</em:optionsURL>
-	<em:creator>saneyuki</em:creator>
+	<em:creator>saneyuki_s</em:creator>
 
 	<!-- Target Application -->
 	<!-- Thunderbird -->
