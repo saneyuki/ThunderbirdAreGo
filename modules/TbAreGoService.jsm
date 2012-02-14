@@ -9,6 +9,7 @@ Cu.import("resource://gre/modules/Services.jsm");
 
 const kPREF_BRANCH         = "extensions.TbAreGo.";
 const kPREFNAME_AUDIO_PATH = "audioFilePath";
+const kSTRING_BUNDLE       = "chrome://TbAreGo/locale/TbAreGo.properties";
 
 let TbAreGoService = {
 
@@ -25,7 +26,7 @@ let TbAreGoService = {
 	get strings () {
 		delete this.strings
 		return this.strings = Services.strings
-		                      .createBundle("chrome://TbAreGo/locale/TbAreGo.properties");
+		                      .createBundle(kSTRING_BUNDLE);
 	},
 
 
