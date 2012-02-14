@@ -7,23 +7,16 @@ let TbAreGoOptions = {
 
 	PREFname_audioPath: "audioFilePath",
 
-	_prefSvc: null,
 	get prefSvc() {
-		if (!this._prefSvc) {
-			this._prefSvc = Services.prefs
-							.getBranch(this.prefBranch)
-							.QueryInterface(Components.interfaces.nsIPrefBranch2);
-		}
-		return this._prefSvc;
+		delete this.prefSvc;
+		return this.prefSvc = Services.prefs.getBranch(this.prefBranch)
+							  .QueryInterface(Components.interfaces.nsIPrefBranch2);
 	},
 
-	_strBundle: null,
 	get strBundle() {
-		if (!this._strBundle) {
-			this._strBundle = Services.strings
-							  .createBundle("chrome://TbAreGo/locale/TbAreGo.properties");
-		}
-		return this._strBundle;
+		delete this.strBundle
+		return this.strBundle = Services.strings
+								.createBundle("chrome://TbAreGo/locale/TbAreGo.properties");
 	},
 
 	observe: function (aSubject, aTopic, aData) {
