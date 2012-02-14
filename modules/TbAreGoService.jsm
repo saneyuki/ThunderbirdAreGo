@@ -34,4 +34,18 @@ let TbAreGoService = {
 		Services.prompt.alert(null, null, text);
 	},
 
+	get audioFileURL () {
+		let path = this.prefs.getComplexValue("audioFilePath",
+		                                      Ci.nsISupportsString);
+
+		let file = Cc["@mozilla.org/file/local;1"]
+		           .createInstance(Ci.nsILocalFile);
+		file.initWithPath(path);
+
+		let uri = Services.io.newFileURI(file);
+		let fileURL = uri.spec;
+
+		return fileURL;
+	},
+
 };

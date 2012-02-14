@@ -52,14 +52,7 @@ let TbAreGo = {
 
 	initAudio: function () {
 		try {
-			let path = TbAreGoService.prefs.getComplexValue("audioFilePath", Components.interfaces.nsISupportsString);
-
-			let file = Components.classes['@mozilla.org/file/local;1']
-			           .createInstance(Components.interfaces.nsILocalFile);
-			file.initWithPath(path);
-			let uri = Services.io.newFileURI(file);
-			let fileURL = uri.spec;
-			this.audioElm.src = fileURL;
+			this.audioElm.src = TbAreGoService.audioFileURL;
 		}
 		catch (e) {
 			TbAreGoService.alert("TbAreGo.overlay.alert.setAudioFile");
