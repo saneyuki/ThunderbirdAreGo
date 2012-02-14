@@ -48,4 +48,22 @@ let TbAreGoService = {
 		return fileURL;
 	},
 
+	selectFile: function () {
+		let file = null;
+
+		let filepicker = Cc["@mozilla.org/filepicker;1"]
+		                 .createInstance(Ci.nsIFilePicker);
+		filepicker.appendFilter("Audio File", "*.ogg;");
+
+		let title = this.strings.GetStringFromName("TbAreGo.option.selectAudio.title");
+		filepicker.init(window, title, Ci.nsIFilePicker.modeOpen);
+
+		let dialog = filepicker.show();
+		if (dialog == Ci.nsIFilePicker.returnOK) {
+			file = filepicker.file;
+		}
+
+		return file;
+	},
+
 };

@@ -49,18 +49,8 @@ let TbAreGoOptions = {
 	},
 
 	selectFile: function () {
-		let filepicker = Components.classes['@mozilla.org/filepicker;1']
-		                 .createInstance(Components.interfaces.nsIFilePicker);
-		filepicker.appendFilter("Audio File", "*.ogg;");
-		
-		let title = TbAreGoService.strings
-		            .GetStringFromName("TbAreGo.option.selectAudio.title");
-		filepicker.init(window,
-		                title,
-		                Components.interfaces.nsIFilePicker.modeOpen);
-		let dialog = filepicker.show();
-		if (dialog == Components.interfaces.nsIFilePicker.returnOK) {
-			let file = filepicker.file;
+		let file = TbAreGoService.selectFile();
+		if (file !== null) {
 			TbAreGoService.prefs.setComplexValue(TbAreGoService.PREFNAME_AUDIO_PATH, 
 			                                     Components.interfaces.nsILocalFile,
 			                                     file);
