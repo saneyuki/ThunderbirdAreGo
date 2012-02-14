@@ -2,14 +2,13 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://TbAreGo/TbAreGoService.jsm");
 let TbAreGo = {
 
-	_audioElm: null,
 	get audioElm () {
-		if (!this._audioElm) {
-			let audio = new Audio();
-			audio.type = "audio/ogg";
-			this._audioElm = audio;
-		}
-		return this._audioElm;
+		delete this.audioElm;
+
+		let audio = new Audio();
+		audio.type = "audio/ogg";
+
+		return this.audioElm = audio;
 	},
 
 	handleEvent: function (aEvent) {
