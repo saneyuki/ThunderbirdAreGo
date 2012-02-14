@@ -7,10 +7,4 @@
          id="TbAreGo-overlay">
 	<script type="application/javascript" src="chrome://TbAreGo/content/windowOverlay.js"/>
 
-	<window id="messengerWindow">
-		<html:audio id="TbAreGo-audio"
-		            type="audio/ogg"
-		            style="visibility:collapse;"/>
-	</window>
-
 </overlay>

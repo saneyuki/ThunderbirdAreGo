@@ -1,12 +1,11 @@
 var TbAreGo = {
 
-	// The Audio Element's Id.
-	AUDIO_ID: "TbAreGo-audio",
-
 	_audioElm: null,
 	get audioElm () {
 		if (!this._audioElm) {
-			this._audioElm = document.getElementById(this.AUDIO_ID);
+			let audio = new Audio();
+			audio.type = "audio/ogg";
+			this._audioElm = audio;
 		}
 		return this._audioElm;
 	},
