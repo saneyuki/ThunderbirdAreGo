@@ -19,8 +19,7 @@ let TbAreGoService = {
 
 	get prefs () {
 		delete this.prefs;
-		return this.prefs = Services.prefs.getBranch(kPREF_BRANCH)
-		                    .QueryInterface(Components.interfaces.nsIPrefBranch2);
+		return this.prefs = Services.prefs.getBranch(kPREF_BRANCH);
 	},
 
 	get strings () {
