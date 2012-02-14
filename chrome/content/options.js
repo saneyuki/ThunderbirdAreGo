@@ -1,3 +1,4 @@
+Components.utils.import("resource://gre/modules/Services.jsm");
 var TbAreGoOptions = {
 
 	textboxId_audioFileName: "TbAreGo-audioFileName",
@@ -9,10 +10,9 @@ var TbAreGoOptions = {
 	_prefSvc: null,
 	get prefSvc() {
 		if (!this._prefSvc) {
-			this._prefSvc = Components.classes["@mozilla.org/preferences-service;1"]
-			                .getService(Components.interfaces.nsIPrefService)
-			                .getBranch(this.prefBranch)
-			                .QueryInterface(Components.interfaces.nsIPrefBranch2);
+			this._prefSvc = Services.prefs
+							.getBranch(this.prefBranch)
+							.QueryInterface(Components.interfaces.nsIPrefBranch2);
 		}
 		return this._prefSvc;
 	},
@@ -20,9 +20,8 @@ var TbAreGoOptions = {
 	_strBundle: null,
 	get strBundle() {
 		if (!this._strBundle) {
-			this._strBundle = Components.classes["@mozilla.org/intl/stringbundle;1"]
-			                  .getService(Components.interfaces.nsIStringBundleService)
-			                  .createBundle("chrome://TbAreGo/locale/TbAreGo.properties");
+			this._strBundle = Services.strings
+							  .createBundle("chrome://TbAreGo/locale/TbAreGo.properties");
 		}
 		return this._strBundle;
 	},

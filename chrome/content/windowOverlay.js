@@ -1,3 +1,4 @@
+Components.utils.import("resource://gre/modules/Services.jsm");
 var TbAreGo = {
 
 	_audioElm: null,
@@ -15,8 +16,7 @@ var TbAreGo = {
 	_prefSvc: null,
 	get prefSvc() {
 		if (!this._prefSvc) {
-			this._prefSvc = Components.classes["@mozilla.org/preferences-service;1"]
-			                .getService(Components.interfaces.nsIPrefService)
+			this._prefSvc = Services.prefs
 			                .getBranch(this.prefBranch)
 			                .QueryInterface(Components.interfaces.nsIPrefBranch2);
 		}
@@ -26,8 +26,7 @@ var TbAreGo = {
 	_strBundle: null,
 	get strBundle() {
 		if (!this._strBundle) {
-			this._strBundle = Components.classes["@mozilla.org/intl/stringbundle;1"]
-			                  .getService(Components.interfaces.nsIStringBundleService)
+			this._strBundle = Services.strings
 			                  .createBundle("chrome://TbAreGo/locale/TbAreGo.properties");
 		}
 		return this._strBundle;
@@ -78,9 +77,7 @@ var TbAreGo = {
 			var file = Components.classes['@mozilla.org/file/local;1']
 			           .createInstance(Components.interfaces.nsILocalFile);
 			file.initWithPath(path);
-			var ioService = Components.classes['@mozilla.org/network/io-service;1']
-			                .getService(Components.interfaces.nsIIOService);
-			var uri = ioService.newFileURI(file);
+			var uri = Services.io.newFileURI(file);
 			var fileURL = uri.spec;
 			this.audioElm.src = fileURL;
 		}
