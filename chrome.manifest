@@ -1,6 +1,9 @@
 # Defines the package
 content  TbAreGo               chrome/content/
 
+# modules
+resource TbAreGo               modules/
+
 ## Overlay
 overlay  chrome://messenger/content/messenger.xul  chrome://TbAreGo/content/windowOverlay.xul
 

@@ -1,23 +1,7 @@
-Components.utils.import("resource://gre/modules/Services.jsm");
+Components.utils.import("resource://TbAreGo/TbAreGoService.jsm");
 let TbAreGoOptions = {
 
 	textboxId_audioFileName: "TbAreGo-audioFileName",
-
-	prefBranch: "extensions.TbAreGo.",
-
-	PREFname_audioPath: "audioFilePath",
-
-	get prefSvc() {
-		delete this.prefSvc;
-		return this.prefSvc = Services.prefs.getBranch(this.prefBranch)
-							  .QueryInterface(Components.interfaces.nsIPrefBranch2);
-	},
-
-	get strBundle() {
-		delete this.strBundle
-		return this.strBundle = Services.strings
-								.createBundle("chrome://TbAreGo/locale/TbAreGo.properties");
-	},
 
 	observe: function (aSubject, aTopic, aData) {
 		switch (aTopic) {
@@ -48,19 +32,20 @@ let TbAreGoOptions = {
 		window.removeEventListener("load", this, false);
 		window.addEventListener("unload", this, false);
 
-		let path = this.prefSvc.getComplexValue(this.PREFname_audioPath,
-		                                        Components.interfaces.nsISupportsString);
+		let path = TbAreGoService.prefs.getComplexValue(TbAreGoService.PREFNAME_AUDIO_PATH,
+		                                                Components.interfaces.nsISupportsString);
 		document.getElementById(this.textboxId_audioFileName).value = path;
 
-		this.prefSvc.addObserver("", this, false);
+		TbAreGoService.prefs.addObserver("", this, false);
 	},
 
 	onUnLoad: function() {
 		window.removeEventListener("unload", this, false);
-		this.prefSvc.removeObserver("", this);
+		TbAreGoService.prefs.removeObserver("", this);
 
 		if (this._prefChanged) {
-			let pleaseRestart = this.strBundle.GetStringFromName("TbAreGo.option.pleaseRestart");
+			let pleaseRestart = TbAreGoService.strings
+			                    .GetStringFromName("TbAreGo.option.pleaseRestart");
 			window.alert(pleaseRestart);
 		}
 	},
@@ -70,14 +55,17 @@ let TbAreGoOptions = {
 		                 .createInstance(Components.interfaces.nsIFilePicker);
 		filepicker.appendFilter("Audio File", "*.ogg;");
 		
-		let title = this.strBundle.GetStringFromName("TbAreGo.option.selectAudio.title");
+		let title = TbAreGoService.strings
+		            .GetStringFromName("TbAreGo.option.selectAudio.title");
 		filepicker.init(window,
 		                title,
 		                Components.interfaces.nsIFilePicker.modeOpen);
 		let dialog = filepicker.show();
 		if (dialog == Components.interfaces.nsIFilePicker.returnOK) {
 			let file = filepicker.file;
-			this.prefSvc.setComplexValue(this.PREFname_audioPath, Components.interfaces.nsILocalFile, file);
+			TbAreGoService.prefs.setComplexValue(TbAreGoService.PREFNAME_AUDIO_PATH, 
+			                                     Components.interfaces.nsILocalFile,
+			                                     file);
 			document.getElementById(this.textboxId_audioFileName).value = file.path;
 		}
 	},

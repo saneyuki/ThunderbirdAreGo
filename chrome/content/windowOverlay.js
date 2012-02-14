@@ -1,4 +1,5 @@
 Components.utils.import("resource://gre/modules/Services.jsm");
+Components.utils.import("resource://TbAreGo/TbAreGoService.jsm");
 let TbAreGo = {
 
 	_audioElm: null,
@@ -9,20 +10,6 @@ let TbAreGo = {
 			this._audioElm = audio;
 		}
 		return this._audioElm;
-	},
-
-	prefBranch: "extensions.TbAreGo.",
-
-	get prefSvc() {
-		delete this.prefSvc;
-		return this.prefSvc = Services.prefs.getBranch(this.prefBranch)
-		                      .QueryInterface(Components.interfaces.nsIPrefBranch2);
-	},
-
-	get strBundle() {
-		delete this.strBundle
-		return this.strBundle = Services.strings
-		                        .createBundle("chrome://TbAreGo/locale/TbAreGo.properties");
 	},
 
 	handleEvent: function (aEvent) {
@@ -46,7 +33,7 @@ let TbAreGo = {
 		this.initAudio();
 		this.audioElm.play();
 
-		let isLoop = this.prefSvc.getBoolPref("loopPlay");
+		let isLoop = TbAreGoService.prefs.getBoolPref("loopPlay");
 		if (isLoop) {
 			this.audioElm.addEventListener("ended", this, false);
 		}
@@ -57,7 +44,7 @@ let TbAreGo = {
 
 		this.audioElm.pause();
 
-		let isLoop = this.prefSvc.getBoolPref("loopPlay");
+		let isLoop = TbAreGoService.prefs.getBoolPref("loopPlay");
 		if (isLoop) {
 			this.audioElm.removeEventListener("ended", this, false);
 		}
@@ -65,7 +52,7 @@ let TbAreGo = {
 
 	initAudio: function () {
 		try {
-			let path = this.prefSvc.getComplexValue("audioFilePath", Components.interfaces.nsISupportsString);
+			let path = TbAreGoService.prefs.getComplexValue("audioFilePath", Components.interfaces.nsISupportsString);
 
 			let file = Components.classes['@mozilla.org/file/local;1']
 			           .createInstance(Components.interfaces.nsILocalFile);
@@ -75,7 +62,8 @@ let TbAreGo = {
 			this.audioElm.src = fileURL;
 		}
 		catch (e) {
-			let pleseSet = this.strBundle.GetStringFromName("TbAreGo.overlay.alert.setAudioFile");
+			let pleseSet = TbAreGoService.strings
+			               .GetStringFromName("TbAreGo.overlay.alert.setAudioFile");
 			window.alert(pleseSet);
 			return;
 		}
