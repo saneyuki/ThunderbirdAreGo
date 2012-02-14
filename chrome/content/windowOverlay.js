@@ -31,7 +31,6 @@ let TbAreGo = {
 		window.addEventListener("unload", this, false);
 
 		this.initAudio();
-		this.audioElm.play();
 
 		let isLoop = TbAreGoService.prefs.getBoolPref("loopPlay");
 		if (isLoop) {
@@ -53,6 +52,7 @@ let TbAreGo = {
 	initAudio: function () {
 		try {
 			this.audioElm.src = TbAreGoService.audioFileURL;
+			this.audioElm.play();
 		}
 		catch (e) {
 			TbAreGoService.alert("TbAreGo.overlay.alert.setAudioFile");
