@@ -62,10 +62,7 @@ let TbAreGo = {
 			this.audioElm.src = fileURL;
 		}
 		catch (e) {
-			let pleseSet = TbAreGoService.strings
-			               .GetStringFromName("TbAreGo.overlay.alert.setAudioFile");
-			window.alert(pleseSet);
-			return;
+			TbAreGoService.alert("TbAreGo.overlay.alert.setAudioFile");
 		}
 	},
 

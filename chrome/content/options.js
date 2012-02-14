@@ -44,9 +44,7 @@ let TbAreGoOptions = {
 		TbAreGoService.prefs.removeObserver("", this);
 
 		if (this._prefChanged) {
-			let pleaseRestart = TbAreGoService.strings
-			                    .GetStringFromName("TbAreGo.option.pleaseRestart");
-			window.alert(pleaseRestart);
+			TbAreGoService.alert("TbAreGo.option.pleaseRestart");
 		}
 	},
 

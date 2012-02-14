@@ -29,5 +29,9 @@ let TbAreGoService = {
 		                      .createBundle(kSTRING_BUNDLE);
 	},
 
+	alert: function (aStringName) {
+		let text = this.strings.GetStringFromName(aStringName);
+		Services.prompt.alert(null, null, text);
+	},
 
 };
