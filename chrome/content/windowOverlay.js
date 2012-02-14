@@ -20,9 +20,6 @@ let TbAreGo = {
 			case "unload":
 				this.onUnLoad();
 				break;
-			case "ended":
-				this.resetPlayTime();
-				break;
 		}
 	},
 
@@ -31,37 +28,26 @@ let TbAreGo = {
 		window.addEventListener("unload", this, false);
 
 		this.initAudio();
-
-		let isLoop = TbAreGoService.prefs.getBoolPref("loopPlay");
-		if (isLoop) {
-			this.audioElm.addEventListener("ended", this, false);
-		}
 	},
 
 	onUnLoad: function() {
 		window.removeEventListener("unload", this, false);
 
 		this.audioElm.pause();
-
-		let isLoop = TbAreGoService.prefs.getBoolPref("loopPlay");
-		if (isLoop) {
-			this.audioElm.removeEventListener("ended", this, false);
-		}
 	},
 
 	initAudio: function () {
 		try {
 			this.audioElm.src = TbAreGoService.audioFileURL;
+
+			let isLoop = TbAreGoService.prefs.getBoolPref("loopPlay");
+			this.audioElm.loop = isLoop;
+
 			this.audioElm.play();
 		}
 		catch (e) {
 			TbAreGoService.alert("TbAreGo.overlay.alert.setAudioFile");
 		}
-	},
-
-	resetPlayTime: function () {
-		this.audioElm.currentTime = 0;
-		this.audioElm.play();
 	},
 };
 window.addEventListener("load", TbAreGo, false);
