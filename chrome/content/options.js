@@ -1,5 +1,5 @@
 Components.utils.import("resource://gre/modules/Services.jsm");
-var TbAreGoOptions = {
+let TbAreGoOptions = {
 
 	textboxId_audioFileName: "TbAreGo-audioFileName",
 
@@ -55,7 +55,7 @@ var TbAreGoOptions = {
 		window.removeEventListener("load", this, false);
 		window.addEventListener("unload", this, false);
 
-		var path = this.prefSvc.getComplexValue(this.PREFname_audioPath,
+		let path = this.prefSvc.getComplexValue(this.PREFname_audioPath,
 		                                        Components.interfaces.nsISupportsString);
 		document.getElementById(this.textboxId_audioFileName).value = path;
 
@@ -67,23 +67,23 @@ var TbAreGoOptions = {
 		this.prefSvc.removeObserver("", this);
 
 		if (this._prefChanged) {
-			var pleaseRestart = this.strBundle.GetStringFromName("TbAreGo.option.pleaseRestart");
+			let pleaseRestart = this.strBundle.GetStringFromName("TbAreGo.option.pleaseRestart");
 			window.alert(pleaseRestart);
 		}
 	},
 
 	selectFile: function () {
-		var filepicker = Components.classes['@mozilla.org/filepicker;1']
+		let filepicker = Components.classes['@mozilla.org/filepicker;1']
 		                 .createInstance(Components.interfaces.nsIFilePicker);
 		filepicker.appendFilter("Audio File", "*.ogg;");
 		
-		var title = this.strBundle.GetStringFromName("TbAreGo.option.selectAudio.title");
+		let title = this.strBundle.GetStringFromName("TbAreGo.option.selectAudio.title");
 		filepicker.init(window,
 		                title,
 		                Components.interfaces.nsIFilePicker.modeOpen);
-		var dialog = filepicker.show();
+		let dialog = filepicker.show();
 		if (dialog == Components.interfaces.nsIFilePicker.returnOK) {
-			var file = filepicker.file;
+			let file = filepicker.file;
 			this.prefSvc.setComplexValue(this.PREFname_audioPath, Components.interfaces.nsILocalFile, file);
 			document.getElementById(this.textboxId_audioFileName).value = file.path;
 		}

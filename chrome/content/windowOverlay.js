@@ -1,5 +1,5 @@
 Components.utils.import("resource://gre/modules/Services.jsm");
-var TbAreGo = {
+let TbAreGo = {
 
 	_audioElm: null,
 	get audioElm () {
@@ -53,7 +53,7 @@ var TbAreGo = {
 		this.initAudio();
 		this.audioElm.play();
 
-		var isLoop = this.prefSvc.getBoolPref("loopPlay");
+		let isLoop = this.prefSvc.getBoolPref("loopPlay");
 		if (isLoop) {
 			this.audioElm.addEventListener("ended", this, false);
 		}
@@ -64,7 +64,7 @@ var TbAreGo = {
 
 		this.audioElm.pause();
 
-		var isLoop = this.prefSvc.getBoolPref("loopPlay");
+		let isLoop = this.prefSvc.getBoolPref("loopPlay");
 		if (isLoop) {
 			this.audioElm.removeEventListener("ended", this, false);
 		}
@@ -72,17 +72,17 @@ var TbAreGo = {
 
 	initAudio: function () {
 		try {
-			var path = this.prefSvc.getComplexValue("audioFilePath", Components.interfaces.nsISupportsString);
+			let path = this.prefSvc.getComplexValue("audioFilePath", Components.interfaces.nsISupportsString);
 
-			var file = Components.classes['@mozilla.org/file/local;1']
+			let file = Components.classes['@mozilla.org/file/local;1']
 			           .createInstance(Components.interfaces.nsILocalFile);
 			file.initWithPath(path);
-			var uri = Services.io.newFileURI(file);
-			var fileURL = uri.spec;
+			let uri = Services.io.newFileURI(file);
+			let fileURL = uri.spec;
 			this.audioElm.src = fileURL;
 		}
 		catch (e) {
-			var pleseSet = this.strBundle.GetStringFromName("TbAreGo.overlay.alert.setAudioFile");
+			let pleseSet = this.strBundle.GetStringFromName("TbAreGo.overlay.alert.setAudioFile");
 			window.alert(pleseSet);
 			return;
 		}
