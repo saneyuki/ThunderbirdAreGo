@@ -49,7 +49,7 @@ let TbAreGoOptions = {
 	},
 
 	selectFile: function () {
-		let file = TbAreGoService.selectFile();
+		let file = TbAreGoService.selectFile(window);
 		if (file !== null) {
 			TbAreGoService.prefs.setComplexValue(TbAreGoService.PREFNAME_AUDIO_PATH, 
 			                                     Components.interfaces.nsILocalFile,

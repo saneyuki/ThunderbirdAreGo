@@ -48,7 +48,7 @@ let TbAreGoService = {
 		return fileURL;
 	},
 
-	selectFile: function () {
+	selectFile: function (aWindow) {
 		let file = null;
 
 		let filepicker = Cc["@mozilla.org/filepicker;1"]
@@ -56,7 +56,7 @@ let TbAreGoService = {
 		filepicker.appendFilter("Audio File", "*.ogg;");
 
 		let title = this.strings.GetStringFromName("TbAreGo.option.selectAudio.title");
-		filepicker.init(window, title, Ci.nsIFilePicker.modeOpen);
+		filepicker.init(aWindow, title, Ci.nsIFilePicker.modeOpen);
 
 		let dialog = filepicker.show();
 		if (dialog == Ci.nsIFilePicker.returnOK) {
