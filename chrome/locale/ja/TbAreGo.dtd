@@ -1,0 +1,5 @@
+<!-- Options -->
+<!ENTITY TbAreGo.option.title                      "オプション">
+<!ENTITY TbAreGo.option.audioOptions.caption       "オーディオファイルの選択">
+<!ENTITY TbAreGo.option.selectAudio.button         "選択">
+<!ENTITY TbAreGo.option.loopPlaying                "ループ再生">

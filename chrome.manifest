@@ -9,3 +9,4 @@ overlay  chrome://messenger/content/messenger.xul  chrome://TbAreGo/content/wind
 
 ## Locale
 locale   TbAreGo   en-US       chrome/locale/en-US/
+locale   TbAreGo   ja          chrome/locale/ja/
