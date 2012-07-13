@@ -1,7 +1,7 @@
 ZIP     = zip
 OPTION  = -6
 # IGNORE  = -x .DS_Store
-PACKAGE = securelogin-rebooted.xpi
+PACKAGE = TbAreGo.xpi
 FILE    = \
   ./chrome/content/options.js \
   ./chrome/content/options.xul \
